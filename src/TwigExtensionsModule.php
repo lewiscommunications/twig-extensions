@@ -27,7 +27,7 @@ class TwigExtensionsModule extends Module
     public function __construct($id, $parent = null, array $config = [])
     {
         Craft::setAlias('@modules/twigextensionsmodule', $this->getBasePath());
-        $this->controllerNamespace = 'modules\twigextensionsmodule\controllers';
+        $this->controllerNamespace = 'lewiscom\twigextensions\controllers';
 
         // Set translation category
         $this->setI18n($id);
