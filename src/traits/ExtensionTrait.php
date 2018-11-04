@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\twigextensionsmodule\traits;
+namespace lewiscom\twigextensions\extensions\traits;
 
 trait TwigExtensionsTrait
 {

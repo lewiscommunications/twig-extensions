@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\twigextensionsmodule\twigextensions;
+namespace lewiscom\twigextensions\extensions;
 
-use modules\twigextensionsmodule\traits\TwigExtensionsTrait;
 use Twig\Extension\AbstractExtension;
+use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
 class DumpDieExtension extends AbstractExtension
 {

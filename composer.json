@@ -1,0 +1,37 @@
+{
+    "name": "lewiscom/twigextensions",
+    "description": "Handy extensions for twig",
+    "type": "craft-module",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-module"
+    ],
+    "support": {
+        "docs": "https://github.com/lewiscommunications/twig-extensions/blob/master/README.md",
+        "issues": "https://github.com/lewiscommunications/twig-extensions/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lewis Communications",
+            "homepage": "https://www.lewiscommunications.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1",
+        "alc/sitemap-crawler": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "lewiscom\\twigextensions\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "TwigExtensions",
+        "handle": "twig-extensions",
+        "class": "lewiscom\\twigextensions\\TwigExtensionsModule"
+    }
+}

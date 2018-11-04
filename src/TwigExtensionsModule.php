@@ -1,14 +1,18 @@
 <?php
 
-namespace modules\twigextensionsmodule;
+namespace lewiscom\twigextensions;
 
 use Craft;
-use craft\i18n\PhpMessageSource;
-use modules\twigextensionsmodule\twigextensions\CaseExtension;
-use modules\twigextensionsmodule\twigextensions\DumpDieExtension;
-use modules\twigextensionsmodule\twigextensions\GlobalVariablesExtension;
-use modules\twigextensionsmodule\twigextensions\RelativeDateExtension;
 use yii\base\Module;
+use craft\i18n\PhpMessageSource;
+use lewiscom\twigextensions\extensions\CaseExtension;
+use lewiscom\twigextensions\extensions\TemplateExists;
+use lewiscom\twigextensions\extensions\ClassExtension;
+use lewiscom\twigextensions\extensions\StringExtension;
+use lewiscom\twigextensions\extensions\DumpDieExtension;
+use lewiscom\twigextensions\extensions\PhoneNumberExtension;
+use lewiscom\twigextensions\extensions\RelativeDateExtension;
+use lewiscom\twigextensions\extensions\GlobalVariablesExtension;
 
 class TwigExtensionsModule extends Module
 {
@@ -25,18 +29,8 @@ class TwigExtensionsModule extends Module
         Craft::setAlias('@modules/twigextensionsmodule', $this->getBasePath());
         $this->controllerNamespace = 'modules\twigextensionsmodule\controllers';
 
-        // Translation category
-        $i18n = Craft::$app->getI18n();
-        /** @noinspection UnSafeIsSetOverArrayInspection */
-        if (! isset($i18n->translations[$id]) && ! isset($i18n->translations[$id.'*'])) {
-            $i18n->translations[$id] = [
-                'class' => PhpMessageSource::class,
-                'sourceLanguage' => 'en-US',
-                'basePath' => '@modules/twigextensionsmodule/translations',
-                'forceTranslation' => true,
-                'allowOverrides' => true,
-            ];
-        }
+        // Set translation category
+        $this->setI18n($id);
 
         // Set this as the global instance of this module class
         static::setInstance($this);
@@ -51,8 +45,12 @@ class TwigExtensionsModule extends Module
 
         $this->registerExtensions([
             CaseExtension::class,
+            PhoneNumberExtension::class,
             GlobalVariablesExtension::class,
-            RelativeDateExtension::class
+            RelativeDateExtension::class,
+            ClassExtension::class,
+            TemplateExists::class,
+            StringExtension::class,
         ]);
 
         if (Craft::$app->env !== 'production') {
@@ -80,6 +78,21 @@ class TwigExtensionsModule extends Module
     {
         foreach ($extensions as $extension) {
             Craft::$app->view->registerTwigExtension(new $extension);
+        }
+    }
+
+    private function setI18n($id) {
+        // Translation category
+        $i18n = Craft::$app->getI18n();
+        /** @noinspection UnSafeIsSetOverArrayInspection */
+        if (! isset($i18n->translations[$id]) && ! isset($i18n->translations[$id.'*'])) {
+            $i18n->translations[$id] = [
+                'class' => PhpMessageSource::class,
+                'sourceLanguage' => 'en-US',
+                'basePath' => '@modules/twigextensionsmodule/translations',
+                'forceTranslation' => true,
+                'allowOverrides' => true,
+            ];
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\twigextensionsmodule\twigextensions;
+namespace lewiscom\twigextensions\extensions;
 
 use Twig\Extension\AbstractExtension;
-use modules\twigextensionsmodule\traits\TwigExtensionsTrait;
+use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
 class RelativeDateExtension extends AbstractExtension
 {
@@ -39,17 +39,18 @@ class RelativeDateExtension extends AbstractExtension
      */
     public function getFilters()
     {
-        return [$this->addFilter('relativeDate')];
+        return [
+            $this->addFilter('relativeDate')
+        ];
     }
 
     /**
      * @param $time
      * @return string
      */
-    public function relativeDate($time)
+    public function relativeDate($time):string
     {
-        $now = time();
-        $diff = $now - $time->format('U');
+        $diff = time() - $time->format('U');
 
         if ($diff < $this->day) {
             return $this->hours($diff);
@@ -62,7 +63,11 @@ class RelativeDateExtension extends AbstractExtension
         return $this->year($diff);
     }
 
-    private function hours(int $diff)
+    /**
+     * @param int $diff
+     * @return string
+     */
+    private function hours(int $diff):string
     {
         $hours = floor($diff / $this->hour);
 
@@ -75,15 +80,15 @@ class RelativeDateExtension extends AbstractExtension
         return $hours . ' hours';
     }
 
-    private function days(int $diff)
+    /**
+     * @param int $diff
+     * @return string
+     */
+    private function days(int $diff):string
     {
         $days = floor($diff / $this->day);
 
-        if ($days == 1) {
-            return '1 day';
-        }
-
-        return $days . ' days';
+        return $days . $days > 1 ? 's' : '';
     }
 
     private function months(int $diff)
@@ -101,10 +106,6 @@ class RelativeDateExtension extends AbstractExtension
     {
         $years = floor($diff / $this->year);
 
-        if ($years == 1) {
-            return 'Over 1 year';
-        }
-
-        return 'Over ' . $years . ' years';
+        return 'Over ' . $years . ' year' . $years > 1 ? 's' : '';
     }
 }

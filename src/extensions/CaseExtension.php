@@ -1,9 +1,9 @@
 <?php
 
-namespace modules\twigextensionsmodule\twigextensions;
+namespace lewiscom\twigextensions\extensions;
 
 use Twig\Extension\AbstractExtension;
-use modules\twigextensionsmodule\traits\TwigExtensionsTrait;
+use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
 class CaseExtension extends AbstractExtension
 {
@@ -24,15 +24,16 @@ class CaseExtension extends AbstractExtension
     {
         return [
             $this->addFilter('camelCase'),
-            $this->addFilter('studlyCase')
+            $this->addFilter('studlyCase'),
+            $this->addFilter('kebabCase')
         ];
     }
 
     /**
      * @param string $string
-     * @return mixed
+     * @return string
      */
-    public function studlyCase(string $string)
+    public function studlyCase(string $string):string
     {
         return str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $string)));
     }
@@ -41,7 +42,16 @@ class CaseExtension extends AbstractExtension
      * @param string $string
      * @return string
      */
-    public function camelCase(string $string)
+    public function kebabCase(string $string):string
+    {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $string));
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public function camelCase(string $string):string
     {
         return lcfirst($this->studlyCase($string));
     }

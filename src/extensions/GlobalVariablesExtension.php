@@ -1,6 +1,6 @@
 <?php
 
-namespace modules\twigextensionsmodule\twigextensions;
+namespace lewiscom\twigextensions\extensions;
 
 use Craft;
 use Twig\Extension\AbstractExtension;
@@ -11,7 +11,7 @@ class GlobalVariablesExtension extends AbstractExtension implements GlobalsInter
     /**
      * @return array
      */
-    public function getGlobals()
+    public function getGlobals():array
     {
         return [
             'conf' => Craft::$app->config->getGeneral()
