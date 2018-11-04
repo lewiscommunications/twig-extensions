@@ -61,7 +61,7 @@ class TwigExtensionsModule extends Module
 
         Craft::info(
             Craft::t(
-                'twig-extensions-module',
+                'twig-extensions',
                 '{name} module loaded',
                 ['name' => 'TwigExtensions']
             ),
