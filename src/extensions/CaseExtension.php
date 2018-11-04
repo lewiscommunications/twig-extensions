@@ -2,6 +2,7 @@
 
 namespace lewiscom\twigextensions\extensions;
 
+use Craft;
 use Twig\Extension\AbstractExtension;
 use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
@@ -14,7 +15,7 @@ class CaseExtension extends AbstractExtension
      */
     public function getName()
     {
-        return 'Case';
+        return Craft::t('twig-extensions', 'Case Extension');
     }
 
     /**

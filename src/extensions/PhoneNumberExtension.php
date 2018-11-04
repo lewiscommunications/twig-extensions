@@ -2,6 +2,7 @@
 
 namespace lewiscom\twigextensions\extensions;
 
+use Craft;
 use Twig\Extension\AbstractExtension;
 use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
@@ -14,7 +15,7 @@ class PhoneNumberExtension extends AbstractExtension
      */
     public function getName()
     {
-        return 'Phone Number';
+        return Craft::t('twig-extensions', 'Phone Number Extension');
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace lewiscom\twigextensions\extensions;
 
+use Craft;
 use Twig\Extension\AbstractExtension;
 use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
@@ -14,7 +15,7 @@ class ClassExtension extends AbstractExtension
      */
     public function getName()
     {
-        return 'Class Extension';
+        return Craft::t('twig-extensions', 'Class Extension');
     }
 
     /**
@@ -38,7 +39,9 @@ class ClassExtension extends AbstractExtension
     public function getClass($object):string
     {
         if (! is_object($object)) {
-            throw new \Twig_Error_Loader('Value passed to the getClass function must be of type object.');
+            throw new \Twig_Error_Loader(
+                Craft::t('twig-extensions', 'Value passed to the getClass function must be of type object.')
+            );
         }
 
         return (new \ReflectionClass($object))->getShortName();
