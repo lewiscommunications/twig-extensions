@@ -15,7 +15,7 @@ class ClassExtension extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'Class Extension');
+        return Craft::t('twigextensions', 'Class Extension');
     }
 
     /**
@@ -40,7 +40,7 @@ class ClassExtension extends AbstractExtension
     {
         if (! is_object($object)) {
             throw new \Twig_Error_Loader(
-                Craft::t('twig-extensions', 'Value passed to the getClass function must be of type object.')
+                Craft::t('twigextensions', 'Value passed to the getClass function must be of type object.')
             );
         }
 

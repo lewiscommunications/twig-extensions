@@ -32,7 +32,7 @@ class RelativeDateExtension extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'Relative Time Extension');
+        return Craft::t('twigextensions', 'Relative Time Extension');
     }
 
     /**
@@ -73,12 +73,12 @@ class RelativeDateExtension extends AbstractExtension
         $hours = floor($diff / $this->hour);
 
         if ($hours < 1) {
-            return Craft::t('twig-extensions', 'Less than 1 hour');
+            return Craft::t('twigextensions', 'Less than 1 hour');
         } else if ($hours == 1) {
-            return Craft::t('twig-extensions', '1 hour');
+            return Craft::t('twigextensions', '1 hour');
         }
 
-        return Craft::t('twig-extensions', '{hours} hours', [
+        return Craft::t('twigextensions', '{hours} hours', [
             'hours' => $hours
         ]);
     }
@@ -99,10 +99,10 @@ class RelativeDateExtension extends AbstractExtension
         $days = floor($diff / $this->day);
 
         if ($days >= 30 && $days < 60) {
-            return Craft::t('twig-extensions', 'About 1 month');
+            return Craft::t('twigextensions', 'About 1 month');
         }
 
-        return Craft::t('twig-extensions', '{months} months', [
+        return Craft::t('twigextensions', '{months} months', [
             'months' => floor($days / 30)
         ]);
     }
@@ -111,7 +111,7 @@ class RelativeDateExtension extends AbstractExtension
     {
         $years = floor($diff / $this->year);
 
-        return Craft::t('twig-extensions', 'Over {years}{s}', [
+        return Craft::t('twigextensions', 'Over {years}{s}', [
             'years' => $years,
             's' => $years > 1 ? 's' : '',
         ]);

@@ -14,7 +14,7 @@ class TemplateExists extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'Template Exists');
+        return Craft::t('twigextensions', 'Template Exists');
     }
 
     /**

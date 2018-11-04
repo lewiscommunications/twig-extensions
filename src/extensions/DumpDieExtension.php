@@ -15,7 +15,7 @@ class DumpDieExtension extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'Dump and Die Extension');
+        return Craft::t('twigextensions', 'Dump and Die Extension');
     }
 
     /**

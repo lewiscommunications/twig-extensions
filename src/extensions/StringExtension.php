@@ -14,7 +14,7 @@ class StringExtension extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'String Extension');
+        return Craft::t('twigextensions', 'String Extension');
     }
 
     /**

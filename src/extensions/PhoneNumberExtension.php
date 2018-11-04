@@ -15,7 +15,7 @@ class PhoneNumberExtension extends AbstractExtension
      */
     public function getName()
     {
-        return Craft::t('twig-extensions', 'Phone Number Extension');
+        return Craft::t('twigextensions', 'Phone Number Extension');
     }
 
     /**
