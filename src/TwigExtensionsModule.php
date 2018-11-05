@@ -6,13 +6,14 @@ use Craft;
 use yii\base\Module;
 use craft\i18n\PhpMessageSource;
 use lewiscom\twigextensions\extensions\CaseExtension;
-use lewiscom\twigextensions\extensions\TemplateExists;
+use lewiscom\twigextensions\extensions\TemplateExistsExtension;
 use lewiscom\twigextensions\extensions\ClassExtension;
 use lewiscom\twigextensions\extensions\StringExtension;
 use lewiscom\twigextensions\extensions\DumpDieExtension;
 use lewiscom\twigextensions\extensions\PhoneNumberExtension;
 use lewiscom\twigextensions\extensions\RelativeDateExtension;
 use lewiscom\twigextensions\extensions\GlobalVariablesExtension;
+use lewiscom\twigextensions\extensions\RegExpExtension;
 
 class TwigExtensionsModule extends Module
 {
@@ -20,6 +21,23 @@ class TwigExtensionsModule extends Module
      * @var TwigExtensionsModule
      */
     public static $instance;
+
+    /**
+     * The available extensions
+     *
+     * @var array
+     */
+    public $extensions = [
+        CaseExtension::class,
+        PhoneNumberExtension::class,
+        GlobalVariablesExtension::class,
+        RelativeDateExtension::class,
+        ClassExtension::class,
+        TemplateExistsExtension::class,
+        StringExtension::class,
+        RegExpExtension::class,
+        DumpDieExtension::class,
+    ];
 
     /**
      * @inheritdoc
@@ -43,21 +61,11 @@ class TwigExtensionsModule extends Module
         parent::init();
         self::$instance = $this;
 
-        $this->registerExtensions([
-            CaseExtension::class,
-            PhoneNumberExtension::class,
-            GlobalVariablesExtension::class,
-            RelativeDateExtension::class,
-            ClassExtension::class,
-            TemplateExists::class,
-            StringExtension::class,
-        ]);
+        $settings = Craft::$app->config->getConfigFromFile('twigextensions');
 
-        if (Craft::$app->env !== 'production') {
-            $this->registerExtensions([
-                DumpDieExtension::class,
-            ]);
-        }
+        $this->registerExtensions(
+            array_diff($this->extensions, $settings['disabled'] ?? [])
+        );
 
         Craft::info(
             Craft::t(
@@ -81,6 +89,11 @@ class TwigExtensionsModule extends Module
         }
     }
 
+    /**
+     * Set the internationalization category
+     *
+     * @param $id - module id
+     */
     private function setI18n($id) {
         // Translation category
         $i18n = Craft::$app->getI18n();

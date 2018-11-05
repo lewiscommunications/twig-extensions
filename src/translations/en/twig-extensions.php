@@ -12,5 +12,6 @@ return [
     'About 1 month' => 'About 1 month',
     '{months} months' => '{months} months',
     'Template Exists' => 'Template Exists',
-    'Value passed to the getClass function must be of type object.' => 'Value passed to the getClass function must be of type object.'
+    'Value passed to the getClass function must be of type object.' => 'Value passed to the getClass function must be of type object.',
+    'Using the eval modifier for regular expressions is not allowed.' => 'Using the eval modifier for regular expressions is not allowed.',
 ];

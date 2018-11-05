@@ -5,7 +5,7 @@ namespace lewiscom\twigextensions\extensions;
 use Twig\Extension\AbstractExtension;
 use lewiscom\twigextensions\traits\TwigExtensionsTrait;
 
-class TemplateExists extends AbstractExtension
+class TemplateExistsExtension extends AbstractExtension
 {
     use TwigExtensionsTrait;
 

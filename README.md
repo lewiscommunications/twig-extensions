@@ -6,6 +6,55 @@ This module adds some extra functionality to Twig.
 
 This module requires Craft CMS 3.0.0-RC1 or later.
 
+## Installation
+
+Require the composer package
+
+```shell
+composer require lewiscom/twigextensions
+```
+
+Add to the module to your `config/app.php`
+
+```php
+return [
+    'modules' => [
+        'twigextensions' => [
+            'class' => lewiscom\twigextensions\TwigExtensionsModule::class
+        ],
+    ],
+    'bootstrap' => [
+        'twigextensions'
+    ],
+];
+```
+
+## Settings
+
+If you need to disable certain extensions on a per environment basis, simply copy the configuration file below, name it `'twigextensions.php` place it in your `craft/config`  folder.  Here it will follow the same environemnt rules as other
+craft configuration.
+
+```php
+<?php
+
+return [
+    // All environments
+    '*' => [
+        'disabled' => [
+            lewiscom\twigextensions\extensions\PhoneNumberExtension::class,
+        ],
+    ],
+    'production' => [
+        'disabled' => [
+            lewiscom\twigextensions\extensions\DumpDieExtension::class,
+        ],
+    ],
+    'dev' => [
+        lewiscom\twigextensions\extensions\RegExpExtension::class,
+    ]
+];
+```
+
 ## Extensions
 
 ### CaseExtension
@@ -47,8 +96,23 @@ public function getGlobals():array
 
 Converts a date object into a human readable relative date.
 
-| Filter       | Input                   | Output      | Description                                                         |
-| ------------ | ----------------------- | ----------- | ------------------------------------------------------------------- |
-| relativeDate | `{{ entry.createdAt }}` | 2 hours ago | Outputs a human readable relative date to the current date and time |
+| Filter       | Input                   | Output        | Description                                                         |
+| ------------ | ----------------------- | ------------- | ------------------------------------------------------------------- |
+| relativeDate | `{{ entry.createdAt }}` | `2 hours ago` | Outputs a human readable relative date to the current date and time |
+
+### RegExpExtension
+
+Adds various regular expression functions
+
+| Function    | Input                                     | Output | Description                                                                       |
+| ----------- | ----------------------------------------- | ------ | --------------------------------------------------------------------------------- |
+| pregReplace | `{{ pregReplace('test 123', '/\\D+/') }}` | `123`  | Uses PHPs `preg_replace` function to search and replace using regular expressions |
+
+| Parameter     | Description                                                                     | Default | Required |
+| ------------- | ------------------------------------------------------------------------------- | :-----: | :------: |
+| `value`       | The string that will be searches                                                | -       | ✔        |
+| `pattern`     | The regular expression pattern to be used. **Note** you must escape backslashes | -       | ✔        |
+| `replacement` | What matches will be replaced with                                              | `''`    |          |
+| `limit`       | The maximum number of matches                                                   | `-1`    |          |
 
 Brought to you by [Lewis Communications](https://www.lewiscommunications.com)
