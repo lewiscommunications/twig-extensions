@@ -71,7 +71,7 @@ Adds various case converting helpers
 
 ### DumpDieExtension
 
-Makes the [larapack/dd](https://github.com/larapack/dd) functions available in twig templates locally
+Makes the [larapack/dd](https://github.com/larapack/dd) functions available in twig templates
 
 | Function | Input                | Description                                       |
 | -------- | -------------------- | ------------------------------------------------- |
@@ -80,18 +80,18 @@ Makes the [larapack/dd](https://github.com/larapack/dd) functions available in t
 
 ### GlobalVariablesExtension
 
-Twig 2.x changes the way variables are scoped, this extension can help bring back some globals that you might not want to import into every template.
+Twig 2.x changes the way variables are scoped, this extension can help bring back some globals that you might not want to import into every template.  You may add as many global variables as you'd like, and set them to different values depending on environment
 
 ```php
-/**
- * @return array
- */
-public function getGlobals():array
-{
-    return [
-        'conf' => Craft::$app->config->getGeneral()
-    ];
-}
+<?php
+
+return [
+    '*' => [
+        'globals' => [
+            'conf' => Craft::$app->config->getGeneral()
+        ],
+    ],
+];
 ```
 
 ### RelativeDateExtension
