@@ -50,8 +50,10 @@ return [
         ],
     ],
     'dev' => [
-        lewiscom\twigextensions\extensions\RegExpExtension::class,
-    ]
+        'disabled' => [
+            lewiscom\twigextensions\extensions\RegExpExtension::class,
+        ],
+    ],
 ];
 ```
 
