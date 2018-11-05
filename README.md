@@ -65,9 +65,9 @@ Adds various case converting helpers
 
 | Filter     | Input                                        | Output                   | Description                       |
 | ---------- | -------------------------------------------- | ------------------------ | --------------------------------- |
-| camelCase  | `{{ 'camel-case-this-string'camelCase }}`    | `camelCaseThisString`    | Camel cases a string              |
-| StudlyCase | `{{ 'studly-case-this-string'|studlyCase }}` | `StudlyCaseThisString`   | Studly, or Pascal, cases a string |
-| kebab-case | `{{ 'studly-case-this-string'|kebabCase }}`  | `kebab-case-this-string` | Kebab cases a string              |
+| camelCase  | `{{ 'camel-case-this-string'\|camelCase }}`    | `camelCaseThisString`    | Camel cases a string              |
+| StudlyCase | `{{ 'studly-case-this-string'\|studlyCase }}` | `StudlyCaseThisString`   | Studly, or Pascal, cases a string |
+| kebab-case | `{{ 'studly-case-this-string'\|kebabCase }}`  | `kebab-case-this-string` | Kebab cases a string              |
 
 ### DumpDieExtension
 
