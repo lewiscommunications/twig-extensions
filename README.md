@@ -63,9 +63,9 @@ return [
 
 Adds various case converting helpers
 
-| Filter     | Input                                        | Output                   | Description                       |
-| ---------- | -------------------------------------------- | ------------------------ | --------------------------------- |
-| camelCase  | `{{ 'camel-case-this-string'\|camelCase }}`    | `camelCaseThisString`    | Camel cases a string              |
+| Filter     | Input                                         | Output                   | Description                       |
+| ---------- | --------------------------------------------- | ------------------------ | --------------------------------- |
+| camelCase  | `{{ 'camel-case-this-string'\|camelCase }}`   | `camelCaseThisString`    | Camel cases a string              |
 | StudlyCase | `{{ 'studly-case-this-string'\|studlyCase }}` | `StudlyCaseThisString`   | Studly, or Pascal, cases a string |
 | kebab-case | `{{ 'studly-case-this-string'\|kebabCase }}`  | `kebab-case-this-string` | Kebab cases a string              |
 
@@ -96,11 +96,37 @@ return [
 
 ### RelativeDateExtension
 
-Converts a date object into a human readable relative date.
+By default, it will convert a date object into a human readable relative date to the current date and time.
 
 | Filter       | Input                   | Output        | Description                                                         |
 | ------------ | ----------------------- | ------------- | ------------------------------------------------------------------- |
-| relativeDate | `{{ entry.createdAt }}` | `2 hours ago` | Outputs a human readable relative date to the current date and time |
+| relativeDate | `{{ entry.createdAt|relativeDate }}` | `2 hours ago` | Outputs a human readable relative date to the current date and time |
+
+| Parameter   | Description                                                                        | Default | Required |
+| ----------- | ---------------------------------------------------------------------------------- | :-----: | :------: |
+| `to`        | A date to compare the initial date to                                              | `false` |          |
+| `precision` | How precise the readout needs to be, increasing the number increases the precision | `1`     |          |
+| `suffix`     | The suffix, set false to disable                                               | `'ago'`    |          |
+
+### Examples
+
+```twig
+{{ entry.createdAt|relativeDate }}
+
+2 hours ago
+```
+
+```twig
+{{ entry.createdAt|relativeDate(false, 3) }}
+
+4 months, 3 weeks, 4 days ago
+```
+
+```twig
+{{ entry.createdAt|relativeDate(futureDate, 1, 'from now') }}
+
+4 days from now
+```
 
 ### RegExpExtension
 

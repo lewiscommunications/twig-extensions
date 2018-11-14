@@ -50,7 +50,9 @@ class RelativeDateExtension extends AbstractExtension
             's' => Craft::t('twigextensions', 'second'),
         ];
 
-        $suffix = Craft::t('twigextensions', $suffix);
+        if ($suffix) {
+            $suffix = Craft::t('twigextensions', $suffix);
+        }
 
         foreach ($diff as $key => $value) {
             if (isset($map[$key]) && $value) {
