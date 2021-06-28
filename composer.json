@@ -7,7 +7,7 @@
         "cms",
         "craftcms",
         "craft-module"
-    ],	
+    ],
     "support": {
         "docs": "https://github.com/lewiscommunications/twig-extensions/blob/master/README.md",
         "issues": "https://github.com/lewiscommunications/twig-extensions/issues"
@@ -20,6 +20,7 @@
         }
     ],
     "require": {
+        "php": ">7.0",
         "craftcms/cms": "^3.0.0-RC1",
         "larapack/dd": "^1.1"
     },

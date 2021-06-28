@@ -44,7 +44,8 @@ class TwigExtensionsModule extends Module
      */
     public function __construct($id, $parent = null, array $config = [])
     {
-        Craft::setAlias('@modules/twigextensionsmodule', $this->getBasePath());
+        Craft::setAlias('@modules/twigextensions', $this->getBasePath());
+        Craft::setAlias('@lewiscom/twigextensions/controllers', $this->getBasePath() . '/controllers');
         $this->controllerNamespace = 'lewiscom\twigextensions\controllers';
 
         // Set translation category
@@ -102,7 +103,7 @@ class TwigExtensionsModule extends Module
             $i18n->translations[$id] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en-US',
-                'basePath' => '@modules/twigextensionsmodule/translations',
+                'basePath' => '@modules/twigextensions/translations',
                 'forceTranslation' => true,
                 'allowOverrides' => true,
             ];

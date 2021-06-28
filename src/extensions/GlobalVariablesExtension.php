@@ -13,8 +13,8 @@ class GlobalVariablesExtension extends AbstractExtension implements GlobalsInter
      */
     public function getGlobals():array
     {
-        return [
-            'conf' => Craft::$app->config->getGeneral()
-        ];
+        $settings = Craft::$app->config->getConfigFromFile('twigextensions');
+
+        return $settings['globals'] ?? [];
     }
 }

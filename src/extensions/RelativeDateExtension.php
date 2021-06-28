@@ -10,23 +10,6 @@ class RelativeDateExtension extends AbstractExtension
 {
     use TwigExtensionsTrait;
 
-    private $hour;
-    private $day;
-    private $month;
-    private $year;
-
-    /**
-     * RelativeDateExtension constructor.
-     */
-    public function __construct()
-    {
-        $this->hour = 3600;
-        $this->day = $this->hour * 24;
-        $this->month = $this->day * 30;
-        $this->year = $this->day * 365;
-
-    }
-
     /**
      * @return string
      */
@@ -46,74 +29,44 @@ class RelativeDateExtension extends AbstractExtension
     }
 
     /**
-     * @param $time
+     * @param $date
      * @return string
      */
-    public function relativeDate($time):string
+    public function relativeDate($from, $to = false, $precision = 1, $suffix = 'ago'): string
     {
-        $diff = time() - $time->format('U');
-
-        if ($diff < $this->day) {
-            return $this->hours($diff);
-        } else if ($diff < $this->month) {
-            return $this->days($diff);
-        } else if ($diff < $this->year) {
-            return $this->months($diff);
+        if (! $to) {
+            $to = new \DateTime(gmdate('Y-m-d H:i:s'));
         }
 
-        return $this->year($diff);
-    }
+        $diff = (new \DateTime($from->format('Y-m-d H:i:s')))->diff($to);
+        $parts = [];
 
-    /**
-     * @param int $diff
-     * @return string
-     */
-    private function hours(int $diff):string
-    {
-        $hours = floor($diff / $this->hour);
+        $map = [
+            'y' => Craft::t('twigextensions', 'year'),
+            'm' => Craft::t('twigextensions', 'month'),
+            'd' => Craft::t('twigextensions', 'day'),
+            'h' => Craft::t('twigextensions', 'hour'),
+            'i' => Craft::t('twigextensions', 'minute'),
+            's' => Craft::t('twigextensions', 'second'),
+        ];
 
-        if ($hours < 1) {
-            return Craft::t('twigextensions', 'Less than 1 hour');
-        } else if ($hours == 1) {
-            return Craft::t('twigextensions', '1 hour');
+        if ($suffix) {
+            $suffix = Craft::t('twigextensions', $suffix);
         }
 
-        return Craft::t('twigextensions', '{hours} hours', [
-            'hours' => $hours
-        ]);
-    }
-
-    /**
-     * @param int $diff
-     * @return string
-     */
-    private function days(int $diff):string
-    {
-        $days = floor($diff / $this->day);
-
-        return $days . $days > 1 ? 's' : '';
-    }
-
-    private function months(int $diff)
-    {
-        $days = floor($diff / $this->day);
-
-        if ($days >= 30 && $days < 60) {
-            return Craft::t('twigextensions', 'About 1 month');
+        foreach ($diff as $key => $value) {
+            if (isset($map[$key]) && $value) {
+                $parts[] = $value . ' ' . $map[$key] . ($value > 1 ? 's' : '');
+            }
         }
 
-        return Craft::t('twigextensions', '{months} months', [
-            'months' => floor($days / 30)
-        ]);
-    }
+        $precision = count($parts) < $precision ? 0 : count($parts) - $precision;
 
-    private function year(int $diff)
-    {
-        $years = floor($diff / $this->year);
+        $reversed = array_reverse($parts);
 
-        return Craft::t('twigextensions', 'Over {years}{s}', [
-            'years' => $years,
-            's' => $years > 1 ? 's' : '',
-        ]);
+        return implode(
+            ', ',
+            array_reverse(array_slice($reversed, $precision))
+        ) . ($suffix ? ' ' . $suffix : '');
     }
 }
