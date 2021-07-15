@@ -3,11 +3,11 @@
 namespace lewiscom\twigextensions\extensions;
 
 use Twig\Extension\AbstractExtension;
-use lewiscom\twigextensions\traits\TwigExtensionsTrait;
+use lewiscom\twigextensions\traits\TwigExtensionTrait;
 
 class TemplateExistsExtension extends AbstractExtension
 {
-    use TwigExtensionsTrait;
+    use TwigExtensionTrait;
 
     /**
      * @return string

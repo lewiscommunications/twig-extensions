@@ -2,7 +2,7 @@
 
 namespace lewiscom\twigextensions\traits;
 
-trait TwigExtensionsTrait
+trait TwigExtensionTrait
 {
     /**
      * @param string $name
