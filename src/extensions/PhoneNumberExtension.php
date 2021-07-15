@@ -4,11 +4,11 @@ namespace lewiscom\twigextensions\extensions;
 
 use Craft;
 use Twig\Extension\AbstractExtension;
-use lewiscom\twigextensions\traits\TwigExtensionsTrait;
+use lewiscom\twigextensions\traits\TwigExtensionTrait;
 
 class PhoneNumberExtension extends AbstractExtension
 {
-    use TwigExtensionsTrait;
+    use TwigExtensionTrait;
 
     /**
      * @return string
